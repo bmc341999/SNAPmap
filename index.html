@@ -5,50 +5,90 @@
         <meta name="viewport" content="initial-scale=1, maximum scale=1, user-scalable=no">
         <title>SNAP Map</title>
         <style>
-            html,body,#viewDiv{
+            html,body{
                 padding:0;
                 margin: 0;
                 height: 100%;
                 width:  100%;
+                
+            }
+            
+            #titleDiv{
+                float:top;
+                padding: 0;
+                height: 6%;
+                width: 100%;
+                background-color:#5788FA;
+                
+            }
+            
+            h1{
+                text-align: center;
+                color: white;
+                font-family: sans-serif;
+                vertical-align: middle;
+                padding-top: 7px
+            }
+            
+            #viewDiv{
+                float: bottom;
+                padding:0;
+                margin: 0;
+                height: 94%;
+                width:  100%;
+                
             }
             #mapDiv{
-                float: left;
-                height: 93%;
-                width:  80%; 
+                float:left;
+                padding: 0;
+                margin: 0;
+                height: 70%;
+                width: 100%; 
             }
             #panelDiv{
-                float: right;
-                height: 93%;
-                width: 20%;
+                float:bottom;
+                padding: 0;
+                height: 30%;
+                width: 100%;
+                background-color: #57A5EB;
             }
             #searchDiv{
-                height: 10%;
-                width: 95%;
-                margin-left:2%;
-                margin-right:2%
+                float:top;
+                padding: 0;
+                height: 20%;
+                width: 100%;
+                
                 
             }
             #legendDiv{
-                height: 90%;
-                width: 100%;
-            }
-            #titleDiv{
-                height: 7%;
+                float:bottom;
+                padding: 0;
+                height: 80%;
                 width: 100%;
                 
             }
-            h1{
-                text-align: center;
-               
-                
+            
+            #legendDiv1{
+                float: left;
+                padding:0;
+                height: 100%;
+                width: 50%;
+                background color: cornsilk;
+                    
             }
-            #panelDiv,#searchDiv,#legendDiv,#titleDiv{
-                
-                background-color: lightgoldenrodyellow
+            
+            #legendDiv2{
+                float: left;
+                padding:0;
+                height: 100%;
+                width: 50%;
+                background color: cornsilk;
+                    
             }
+            
         </style>
-        <link rel="stylesheet" href="https://js.arcgis.com/4.17/esri/css/main.css">
-        <script src="https://js.arcgis.com/4.17/"></script>
+        <link rel="stylesheet" href="https://js.arcgis.com/4.18/esri/css/main.css">
+        <script src="https://js.arcgis.com/4.18/"></script>
         
         <script>
             require([
@@ -57,26 +97,42 @@
                 "esri/Map",
                 "esri/views/MapView",
                 "esri/layers/CSVLayer",
+                "esri/layers/GroupLayer",
+                "esri/layers/VectorTileLayer",
                 "esri/widgets/Legend",
                 "esri/widgets/LayerList",
                 "esri/widgets/Search",
-                "esri/PopupTemplate",
-                "dojo/domReady!"
+                "esri/widgets/Locate",
+                
+                "dojo/domReady!",
             ], function(
-                    esriConfig, urlUtils, Map, MapView, CSVLayer, Legend, LayerList, Search, PopupTemplate){
+                    esriConfig, urlUtils, Map, MapView, CSVLayer, GroupLayer, VectorTileLayer, Legend, LayerList, Search, Locate){
                 
                 
                 var myMap = new Map({
-                    basemap: "topo"
+                    
                 });
                 
                 var myView = new MapView({
                     map: myMap,
                     container: "mapDiv",
                     center: [-82.05587, 39.46],
-                    zoom:8
+                    zoom:7,
+                    popup: {
+                        dockEnabled: true,
+                        dockOptions: {
+                            position: "bottom-center",
+                            breakpoint: false
+                        }
+                    }
                     
                 });
+                
+                var myBaseMap = new VectorTileLayer({
+                    url: "https://arts-sciences.maps.arcgis.com/sharing/rest/content/items/0fa8c337ca3d4de8987d14ab48ae4c05/resources/styles/root.json?f=pjson"
+                });
+                
+                myMap.add(myBaseMap);
                 
                 
                 ////////// Big Box Stores
@@ -87,7 +143,8 @@
                     title: "Big Box Store",
                     popupTemplate: {
                             title: "{storeName}",
-                            content:"<p>This is a SNAP benefit accepting {Store_Type} retailer located at {Address} in {City}, {State}.</p>" 
+                            content:"<p>This is a SNAP benefit accepting {Store_Type} retailer located at {Address} in {City}, {State}.</p>" ,
+                            
                             
                         }
                     
@@ -97,11 +154,12 @@
                     type:"simple", //which outcast new SimpleRenderer
                     symbol:{
                         type: "simple-marker",
-                        color: "red",
+                        style: "square",
+                        color: "#EB3241",
                         size: 10,
                         outline:{
                             width: 0.5,
-                            color: "white"
+                            color: "black"
                         }
                     
                     }
@@ -127,11 +185,11 @@
                     type:"simple", //which outcast new SimpleRenderer
                     symbol:{
                         type: "simple-marker",
-                        color: "orange",
+                        color: "#D66F1E",
                         size: 10,
                         outline:{
                             width: 0.5,
-                            color: "white"
+                            color: "black"
                         }
                     }
                 };
@@ -156,11 +214,12 @@
                     type:"simple", //which outcast new SimpleRenderer
                     symbol:{
                         type: "simple-marker",
-                        color: "yellow",
+                        color: "#42F52D",
+                        style: "diamond",
                         size: 10,
                         outline:{
                             width: 0.5,
-                            color: "white"
+                            color: "black"
                         }
                     }
                 };
@@ -184,11 +243,12 @@
                     type:"simple", //which outcast new SimpleRenderer
                     symbol:{
                         type: "simple-marker",
-                        color: "green",
+                        style:"triangle",
+                        color: "#F5CA11",
                         size: 10,
                         outline:{
                             width: 0.5,
-                            color: "white"
+                            color: "black"
                         }
                     }
                 };
@@ -213,11 +273,12 @@
                     type:"simple", //which outcast new SimpleRenderer
                     symbol:{
                         type: "simple-marker",
-                        color: "blue",
+                        style: "square",
+                        color: "#5788FA",
                         size: 10,
                         outline:{
                             width: 0.5,
-                            color: "white"
+                            color: "black"
                         }
                     }
                 };
@@ -225,15 +286,44 @@
                 myMap.add(smallBox);
                 
                 
-               
+               //////////////////Agencies
+                
+                 var agencies = new CSVLayer({
+                    url:"https://www.dl.dropboxusercontent.com/s/fa6n4usmotfbh1n/Food_Assistance_Programs_Info.csv?dl=0",                 
+                    title: "Food Assistance Agencies",
+                    popupTemplate: {
+                            title: "{EntityName}",
+                            content:"<p>This is a food assistance agency located at {SiteAddress1} in {SiteCity}, {SiteState}.</p> Hours: {HourOpen} - {HourClose}<br><br> Sunday: {Sunday} <br> Monday: {Monday} <br> Tuesday: {Tuesday} <br> Wednesday: {Wednesday} <br> Thursday: {Thursday} <br> Friday: {Friday} <br> Saturday: {Saturday} <br><br> Contact: {Phone}" 
+                            
+                        }
+                    
+                });
+                
+                agencies.renderer = {
+                    type:"simple", //which outcast new SimpleRenderer
+                    symbol:{
+                        type: "simple-marker",
+                        color: "#9C4BD6",
+                        style: "circle",
+                        size: 10,
+                        outline:{
+                            width: 1,
+                            color: "black"
+                        }
+                    
+                    }
+                    
+                };
+                
+                myMap.add(agencies);
                 
                 ///////////////////LayerList
                 
                 
                 
-                const layerList = new LayerList({
+                const layerList1 = new LayerList({
                     view: myView,
-                    container: legendDiv,
+                    container: "legendDiv1",
                     
                     listItemCreatedFunction: function(event){
                         const item = event.item;
@@ -247,14 +337,54 @@
                     }
                 });
                 
+                const layerList2 = new LayerList({
+                    view: myView,
+                    container: "legendDiv2",
+                    
+                    listItemCreatedFunction: function(event){
+                        const item = event.item;
+                        if(item.layer.type != "group"){
+                            
+                            item.panel = {
+                                content: "legend",
+                                open: true
+                            };
+                        }
+                    }
+                });
+                
+                var myGroupLayer1 = new GroupLayer({
+                    
+                    title: "Department Stores",
+                    layers: [smallBox, bigBox]
+                });
+                
+                myMap.add(myGroupLayer1);
+                
+                
+                var myGroupLayer2 = new GroupLayer({
+                    
+                    title: "Stores",
+                    layers: [farmerMarketSpecialty,convenienceStore,groceryStore]
+                });
+                
+                myMap.add(myGroupLayer2);
                 
                 
                 var searchBar = new Search ({
+                    view: myView,
                     container: searchDiv 
                 });
                 
                 
+                var locateBtn = new Locate({
+                    view: myView, 
+                    scale: 8000,
+                });
                 
+                myView.ui.add(locateBtn, {
+                    position: "top-left"
+                });
                 
             });
                 
@@ -264,17 +394,21 @@
     </head>
     <body>
     
-        
+        <div id="titleDiv">
+                <h1>SEO Food Finder - Streets Navigation Vector - Custom</h1>
+            </div>
         <div id="viewDiv">
-            <div id="titleDiv">
-                <h1>SEO Food Finder</h1>
+            <div id="mapDiv">
             </div>
-            <div id="mapDiv"></div>
-            <div id="panelDiv">
-                <div id="searchDiv"></div>
-                <div id="legendDiv"></div>
-            </div>
+                <div id="panelDiv">
+                    <div id="searchDiv"></div>
+                    <div id="legendDiv">
+                        <div id="legendDiv1"></div>
+                        <div id="legendDiv2"></div>
+                    </div>
+                </div>
         </div>
+        
         
         
     
