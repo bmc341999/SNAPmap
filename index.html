@@ -18,7 +18,7 @@
                 padding: 0;
                 height: 6%;
                 width: 100%;
-                background-color:#5788FA;
+                background-color:#35456C;
                 
             }
             
@@ -37,26 +37,40 @@
                 height: 94%;
                 width:  100%;
                 
+                
             }
             #mapDiv{
-                float:left;
+                float:top;
                 padding: 0;
                 margin: 0;
-                height: 70%;
-                width: 100%; 
+                height: 75%;
+                width: 98.5%; 
+                padding-left: .75%;
+                padding-right: .75%;
+                background-color: #35456C;
             }
             #panelDiv{
                 float:bottom;
                 padding: 0;
-                height: 30%;
+                height: 25%;
                 width: 100%;
-                background-color: #57A5EB;
+                background-color: #6E8EE0;
             }
+            /*#popupDiv{
+                float: bottom;
+                margin-left: 25%;
+                margin-right: 25%;
+                height: 30%;
+                width: 50%;
+                background-color: #35456C;
+            }*/
             #searchDiv{
-                float:top;
-                padding: 0;
+                float: top;
+                padding-bottom: 2px;
                 height: 20%;
                 width: 100%;
+                background-color: #6E8EE0;
+                
                 
                 
             }
@@ -73,7 +87,7 @@
                 padding:0;
                 height: 100%;
                 width: 50%;
-                background color: cornsilk;
+                background-color: #6E8EE0;
                     
             }
             
@@ -82,7 +96,7 @@
                 padding:0;
                 height: 100%;
                 width: 50%;
-                background color: cornsilk;
+                background-color: #6E8EE0;
                     
             }
             
@@ -119,17 +133,21 @@
                     center: [-82.05587, 39.46],
                     zoom:7,
                     popup: {
+                        
                         dockEnabled: true,
                         dockOptions: {
-                            position: "bottom-center",
-                            breakpoint: false
-                        }
+                            position: "bottom-left",
+                            breakpoint: false,
+                        
+                        },
                     }
                     
                 });
                 
                 var myBaseMap = new VectorTileLayer({
-                    url: "https://arts-sciences.maps.arcgis.com/sharing/rest/content/items/0fa8c337ca3d4de8987d14ab48ae4c05/resources/styles/root.json?f=pjson"
+                    url: "https://arts-sciences.maps.arcgis.com/sharing/rest/content/items/0fa8c337ca3d4de8987d14ab48ae4c05/resources/styles/root.json?f=pjson",
+                    title: "Basemap",
+                    listMode:"hide"
                 });
                 
                 myMap.add(myBaseMap);
@@ -144,7 +162,7 @@
                     popupTemplate: {
                             title: "{storeName}",
                             content:"<p>This is a SNAP benefit accepting {Store_Type} retailer located at {Address} in {City}, {State}.</p>" ,
-                            
+                            container: "popupDiv"
                             
                         }
                     
@@ -155,11 +173,11 @@
                     symbol:{
                         type: "simple-marker",
                         style: "square",
-                        color: "#EB3241",
-                        size: 10,
+                        color: "#5788FA",
+                        size: 8,
                         outline:{
-                            width: 0.5,
-                            color: "black"
+                            width: 2,
+                            color: "#EB3241"
                         }
                     
                     }
@@ -176,8 +194,8 @@
                     url:"https://www.dl.dropboxusercontent.com/s/lxqxmf7dwyevyix/SNAP_ConvenienceStore.csv?dl=0",       title: "Convenience Store", 
                     popupTemplate: {
                             title: "{Store_Name}",
-                            content:"<p>This is a SNAP benefit accepting {Store_Type} retailer located at {Address} in {City}, {State}.</p>" 
-                            
+                            content:"<p>This is a SNAP benefit accepting {Store_Type} retailer located at {Address} in {City}, {State}.</p>" ,
+                            container: "popupDiv"
                         }
                 });
                 
@@ -185,11 +203,12 @@
                     type:"simple", //which outcast new SimpleRenderer
                     symbol:{
                         type: "simple-marker",
-                        color: "#D66F1E",
-                        size: 10,
+                        color: "#F5CA11",
+                        style: "diamond",
+                        size: 8,
                         outline:{
-                            width: 0.5,
-                            color: "black"
+                            width: 2,
+                            color: "#2BA61E"
                         }
                     }
                 };
@@ -205,7 +224,8 @@
                     title: "Farmer's Market or Specialty Store",
                     popupTemplate: {
                             title: "{Store_Name}",
-                            content:"<p>This is a SNAP benefit accepting {Store_Type} retailer located at {Address} in {City}, {State}.</p>" 
+                            content:"<p>This is a SNAP benefit accepting {Store_Type} retailer located at {Address} in {City}, {State}.</p>" ,
+                            container: "popupDiv"
                             
                         }
                 });
@@ -214,12 +234,12 @@
                     type:"simple", //which outcast new SimpleRenderer
                     symbol:{
                         type: "simple-marker",
-                        color: "#42F52D",
+                        color: "#F5CA11",
                         style: "diamond",
-                        size: 10,
+                        size: 8,
                         outline:{
-                            width: 0.5,
-                            color: "black"
+                            width: 2,
+                            color: "#D66F1E"
                         }
                     }
                 };
@@ -234,7 +254,8 @@
                     url:"https://www.dl.dropboxusercontent.com/s/husg8ay1f1ha0au/SNAP_GroceryStore.csv?dl=0",           title: "Grocery Store",     
                     popupTemplate: {
                             title: "{Store_Name}",
-                            content:"<p>This is a SNAP benefit accepting {Store_Type} retailer located at {Address} in {City}, {State}.</p>" 
+                            content:"<p>This is a SNAP benefit accepting {Store_Type} retailer located at {Address} in {City}, {State}.</p>" ,
+                            container: "popupDiv"
                             
                         }
                 });
@@ -243,12 +264,12 @@
                     type:"simple", //which outcast new SimpleRenderer
                     symbol:{
                         type: "simple-marker",
-                        style:"triangle",
+                        style:"diamond",
                         color: "#F5CA11",
-                        size: 10,
+                        size: 8,
                         outline:{
-                            width: 0.5,
-                            color: "black"
+                            width: 2,
+                            color: "#9C4BD6"
                         }
                     }
                 };
@@ -263,7 +284,8 @@
                     url:"https://www.dl.dropboxusercontent.com/s/hh945smt115ustb/SNAP_SmallBox.csv?dl=0",               title: "Small Box Store",    
                     popupTemplate: {
                             title: "{Store_Name}",
-                            content:"<p>This is a SNAP benefit accepting {Store_Type} retailer located at {Address} in {City}, {State}.</p>" 
+                            content:"<p>This is a SNAP benefit accepting {Store_Type} retailer located at {Address} in {City}, {State}.</p>" ,
+                            container: "popupDiv"
                             
                         }
                 });
@@ -275,10 +297,10 @@
                         type: "simple-marker",
                         style: "square",
                         color: "#5788FA",
-                        size: 10,
+                        size: 8,
                         outline:{
-                            width: 0.5,
-                            color: "black"
+                            width: 2,
+                            color: "#D66F1E"
                         }
                     }
                 };
@@ -288,12 +310,292 @@
                 
                //////////////////Agencies
                 
-                 var agencies = new CSVLayer({
+                var fa_Civic = new CSVLayer({
+                    url:"https://www.dl.dropboxusercontent.com/s/iaef19t991rn4ug/FA_Civic.csv?dl=0",                 
+                    title: "Community Buildings",
+                    popupTemplate: {
+                            title: "{EntityName}",
+                            content:"<p>This is a food assistance agency located at {SiteAddress1} in {SiteCity}, {SiteState}.</p> Hours: {HourOpen} - {HourClose}<br><br> Sunday: {Sunday} <br> Monday: {Monday} <br> Tuesday: {Tuesday} <br> Wednesday: {Wednesday} <br> Thursday: {Thursday} <br> Friday: {Friday} <br> Saturday: {Saturday} <br><br> Contact: {Phone}" ,
+                            container: "popupDiv"
+                            
+                        }
+                    
+                });
+                
+                fa_Civic.renderer = {
+                    type:"simple", //which outcast new SimpleRenderer
+                    symbol:{
+                        type: "simple-marker",
+                        color: "#9C4BD6",
+                        style: "circle",
+                        size: 8,
+                        outline:{
+                            width: 2,
+                            color: "#EB3241"
+                        }
+                    
+                    }
+                    
+                };
+                
+                myMap.add(fa_Civic);
+                
+                
+                var fa_Library = new CSVLayer({
+                    url:"https://www.dl.dropboxusercontent.com/s/agcek8rlp198hrj/FA_Library.csv?dl=0",                 
+                    title: "Libraries",
+                    popupTemplate: {
+                            title: "{EntityName}",
+                            content:"<p>This is a food assistance agency located at {SiteAddress1} in {SiteCity}, {SiteState}.</p> Hours: {HourOpen} - {HourClose}<br><br> Sunday: {Sunday} <br> Monday: {Monday} <br> Tuesday: {Tuesday} <br> Wednesday: {Wednesday} <br> Thursday: {Thursday} <br> Friday: {Friday} <br> Saturday: {Saturday} <br><br> Contact: {Phone}" ,
+                            container: "popupDiv"
+                            
+                        }
+                    
+                });
+                
+                fa_Library.renderer = {
+                    type:"simple", //which outcast new SimpleRenderer
+                    symbol:{
+                        type: "simple-marker",
+                        color: "#9C4BD6",
+                        style: "circle",
+                        size: 8,
+                        outline:{
+                            width: 2,
+                            color: "#D66F1E"
+                        }
+                    
+                    }
+                    
+                };
+                
+                myMap.add(fa_Library);
+                
+                
+                var fa_Other = new CSVLayer({
+                    url:"https://www.dl.dropboxusercontent.com/s/ynklphcadgjkfye/FA_Other.csv?dl=0",                 
+                    title: "Other",
+                    popupTemplate: {
+                            title: "{EntityName}",
+                            content:"<p>This is a food assistance agency located at {SiteAddress1} in {SiteCity}, {SiteState}.</p> Hours: {HourOpen} - {HourClose}<br><br> Sunday: {Sunday} <br> Monday: {Monday} <br> Tuesday: {Tuesday} <br> Wednesday: {Wednesday} <br> Thursday: {Thursday} <br> Friday: {Friday} <br> Saturday: {Saturday} <br><br> Contact: {Phone}" ,
+                            container: "popupDiv"
+                            
+                        }
+                    
+                });
+                
+                fa_Other.renderer = {
+                    type:"simple", //which outcast new SimpleRenderer
+                    symbol:{
+                        type: "simple-marker",
+                        color: "#9C4BD6",
+                        style: "circle",
+                        size: 8,
+                        outline:{
+                            width: 2,
+                            color: "#F5CA11"
+                        }
+                    
+                    }
+                    
+                };
+                
+                myMap.add(fa_Other);
+                
+                
+                var fa_Pantry = new CSVLayer({
+                    url:"https://www.dl.dropboxusercontent.com/s/elcr61my3znz26y/FA_Pantry.csv?dl=0",                 
+                    title: "Food Pantries",
+                    popupTemplate: {
+                            title: "{EntityName}",
+                            content:"<p>This is a food assistance agency located at {SiteAddress1} in {SiteCity}, {SiteState}.</p> Hours: {HourOpen} - {HourClose}<br><br> Sunday: {Sunday} <br> Monday: {Monday} <br> Tuesday: {Tuesday} <br> Wednesday: {Wednesday} <br> Thursday: {Thursday} <br> Friday: {Friday} <br> Saturday: {Saturday} <br><br> Contact: {Phone}" ,
+                            container: "popupDiv"
+                            
+                        }
+                    
+                });
+                
+                fa_Pantry.renderer = {
+                    type:"simple", //which outcast new SimpleRenderer
+                    symbol:{
+                        type: "simple-marker",
+                        color: "#9C4BD6",
+                        style: "circle",
+                        size: 8,
+                        outline:{
+                            width: 2,
+                            color: "#5788FA"
+                        }
+                    
+                    }
+                    
+                };
+                
+                myMap.add(fa_Pantry);
+                
+                
+                var fa_Park = new CSVLayer({
+                    url:"https://www.dl.dropboxusercontent.com/s/95yidseuh28wtj6/FA_Park.csv?dl=0",                 
+                    title: "Parks",
+                    popupTemplate: {
+                            title: "{EntityName}",
+                            content:"<p>This is a food assistance agency located at {SiteAddress1} in {SiteCity}, {SiteState}.</p> Hours: {HourOpen} - {HourClose}<br><br> Sunday: {Sunday} <br> Monday: {Monday} <br> Tuesday: {Tuesday} <br> Wednesday: {Wednesday} <br> Thursday: {Thursday} <br> Friday: {Friday} <br> Saturday: {Saturday} <br><br> Contact: {Phone}" ,
+                            container: "popupDiv"
+                            
+                        }
+                    
+                });
+                
+                fa_Park.renderer = {
+                    type:"simple", //which outcast new SimpleRenderer
+                    symbol:{
+                        type: "simple-marker",
+                        color: "#9C4BD6",
+                        style: "circle",
+                        size: 8,
+                        outline:{
+                            width: 2,
+                            color: "#2BA61E"
+                             
+                        }
+                    
+                    }
+                    
+                };
+                
+                myMap.add(fa_Park);
+                
+                
+                var fa_Religious = new CSVLayer({
+                    url:"https://www.dl.dropboxusercontent.com/s/jmkckev17dk7amt/FA_Religious.csv?dl=0",    
+                    title: "Religious",
+                    popupTemplate: {
+                            title: "{EntityName}",
+                            content:"<p>This is a food assistance agency located at {SiteAddress1} in {SiteCity}, {SiteState}.</p> Hours: {HourOpen} - {HourClose}<br><br> Sunday: {Sunday} <br> Monday: {Monday} <br> Tuesday: {Tuesday} <br> Wednesday: {Wednesday} <br> Thursday: {Thursday} <br> Friday: {Friday} <br> Saturday: {Saturday} <br><br> Contact: {Phone}" ,
+                            container: "popupDiv"
+                            
+                        }
+                    
+                });
+                
+                fa_Religious.renderer = {
+                    type:"simple", //which outcast new SimpleRenderer
+                    symbol:{
+                        type: "simple-marker",
+                        color: "#9C4BD6",
+                        style: "circle",
+                        size: 8,
+                        outline:{
+                            width: 2,
+                            color: "#1FB6F0"
+                        }
+                        
+                    }
+                    
+                };
+                
+                myMap.add(fa_Religious);
+                
+                
+                var fa_Residential = new CSVLayer({
+                    url:"https://www.dl.dropboxusercontent.com/s/q3a5pr8umtfudzv/FA_Residential.csv?dl=0",            
+                    title: "Residential",
+                    popupTemplate: {
+                            title: "{EntityName}",
+                            content:"<p>This is a food assistance agency located at {SiteAddress1} in {SiteCity}, {SiteState}.</p> Hours: {HourOpen} - {HourClose}<br><br> Sunday: {Sunday} <br> Monday: {Monday} <br> Tuesday: {Tuesday} <br> Wednesday: {Wednesday} <br> Thursday: {Thursday} <br> Friday: {Friday} <br> Saturday: {Saturday} <br><br> Contact: {Phone}" ,
+                            container: "popupDiv"
+                            
+                        }
+                    
+                });
+                
+                fa_Residential.renderer = {
+                    type:"simple", //which outcast new SimpleRenderer
+                    symbol:{
+                        type: "simple-marker",
+                        color: "#9C4BD6",
+                        style: "circle",
+                        size: 8,
+                        outline:{
+                            width: 2,
+                            color: "pink"
+                        }
+                    
+                    }
+                    
+                };
+                
+                myMap.add(fa_Residential);
+                
+                
+                var fa_School = new CSVLayer({
+                    url:"https://www.dl.dropboxusercontent.com/s/b68r2s2fqxl5tq0/FA_School.csv?dl=0",                 
+                    title: "Schools",
+                    popupTemplate: {
+                            title: "{EntityName}",
+                            content:"<p>This is a food assistance agency located at {SiteAddress1} in {SiteCity}, {SiteState}.</p> Hours: {HourOpen} - {HourClose}<br><br> Sunday: {Sunday} <br> Monday: {Monday} <br> Tuesday: {Tuesday} <br> Wednesday: {Wednesday} <br> Thursday: {Thursday} <br> Friday: {Friday} <br> Saturday: {Saturday} <br><br> Contact: {Phone}" ,
+                            container: "popupDiv"
+                            
+                        }
+                    
+                });
+                
+                fa_School.renderer = {
+                    type:"simple", //which outcast new SimpleRenderer
+                    symbol:{
+                        type: "simple-marker",
+                        color: "#9C4BD6",
+                        style: "circle",
+                        size: 8,
+                        outline:{
+                            width: 2,
+                            color: "black"
+                        }
+                    
+                    }
+                    
+                };
+                
+                myMap.add(fa_School);
+                
+                
+                var fa_Senior = new CSVLayer({
+                    url:"https://www.dl.dropboxusercontent.com/s/vdvw62xvlolw6kp/FA_Senior.csv?dl=0",                 
+                    title: "Senior Centers",
+                    popupTemplate: {
+                            title: "{EntityName}",
+                            content:"<p>This is a food assistance agency located at {SiteAddress1} in {SiteCity}, {SiteState}.</p> Hours: {HourOpen} - {HourClose}<br><br> Sunday: {Sunday} <br> Monday: {Monday} <br> Tuesday: {Tuesday} <br> Wednesday: {Wednesday} <br> Thursday: {Thursday} <br> Friday: {Friday} <br> Saturday: {Saturday} <br><br> Contact: {Phone}" ,
+                            container: "popupDiv"
+                            
+                        }
+                    
+                });
+                
+                fa_Senior.renderer = {
+                    type:"simple", //which outcast new SimpleRenderer
+                    symbol:{
+                        type: "simple-marker",
+                        color: "#9C4BD6",
+                        style: "circle",
+                        size: 8,
+                        outline:{
+                            width: 2,
+                            color: "black"
+                        }
+                    
+                    }
+                    
+                };
+                
+                myMap.add(fa_Senior);
+                
+                 /*var agencies = new CSVLayer({
                     url:"https://www.dl.dropboxusercontent.com/s/fa6n4usmotfbh1n/Food_Assistance_Programs_Info.csv?dl=0",                 
                     title: "Food Assistance Agencies",
                     popupTemplate: {
                             title: "{EntityName}",
-                            content:"<p>This is a food assistance agency located at {SiteAddress1} in {SiteCity}, {SiteState}.</p> Hours: {HourOpen} - {HourClose}<br><br> Sunday: {Sunday} <br> Monday: {Monday} <br> Tuesday: {Tuesday} <br> Wednesday: {Wednesday} <br> Thursday: {Thursday} <br> Friday: {Friday} <br> Saturday: {Saturday} <br><br> Contact: {Phone}" 
+                            content:"<p>This is a food assistance agency located at {SiteAddress1} in {SiteCity}, {SiteState}.</p> Hours: {HourOpen} - {HourClose}<br><br> Sunday: {Sunday} <br> Monday: {Monday} <br> Tuesday: {Tuesday} <br> Wednesday: {Wednesday} <br> Thursday: {Thursday} <br> Friday: {Friday} <br> Saturday: {Saturday} <br><br> Contact: {Phone}" ,
+                            container: "popupDiv"
                             
                         }
                     
@@ -315,7 +617,7 @@
                     
                 };
                 
-                myMap.add(agencies);
+                myMap.add(agencies); */
                 
                 ///////////////////LayerList
                 
@@ -359,16 +661,27 @@
                     layers: [smallBox, bigBox]
                 });
                 
-                myMap.add(myGroupLayer1);
+                
                 
                 
                 var myGroupLayer2 = new GroupLayer({
                     
-                    title: "Stores",
+                    title: "Other Stores",
                     layers: [farmerMarketSpecialty,convenienceStore,groceryStore]
                 });
                 
+                
+                
+                
+                var myGroupLayer3 = new GroupLayer({
+                    
+                    title: "Food Assistance Agencies",
+                    layers: [fa_Senior,fa_School,fa_Residential,fa_Religious,fa_Park,fa_Pantry,fa_Other,fa_Library,fa_Civic]
+                });
+                
+                myMap.add(myGroupLayer3);
                 myMap.add(myGroupLayer2);
+                myMap.add(myGroupLayer1);
                 
                 
                 var searchBar = new Search ({
@@ -398,9 +711,9 @@
                 <h1>SEO Food Finder</h1>
             </div>
         <div id="viewDiv">
-            <div id="mapDiv">
-            </div>
+            <div id="mapDiv"></div>
                 <div id="panelDiv">
+                    <div id="popupDiv"></div>
                     <div id="searchDiv"></div>
                     <div id="legendDiv">
                         <div id="legendDiv1"></div>
