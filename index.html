@@ -46,7 +46,7 @@
                 float:left;
                 padding: 0;
                 margin: 0;
-                height: 60%;
+                height: 65%;
                 width: 98.5%; 
                 padding-left: .75%;
                 padding-right: .75%;
@@ -56,7 +56,7 @@
                 float:right;
                 margin: 0;
                 padding: 0;
-                height: 40%;
+                height: 35%;
                 width: 100%;
                 background-color: #6E8EE0;
             }
@@ -69,23 +69,16 @@
                 background-color: #35456C;
             }*/
             
-            #helpDiv{
-                float: left;
-                padding: 0;
-                margin: 0%;
-                height: 15%;
-                width: 100%;
-                background-color: #6E8EE0;
-                
-                
-            }
+        
             
             p{
                 text-align: center;
                 color: white;
                 font-family: Arial, sans-serif;
                 font-size:15px;
-                vertical-align: middle;
+                padding-top: 5%;
+                padding-left:3.5%;
+                padding-right:3.5%;
                 
                 
                 
@@ -105,7 +98,7 @@
                 float:bottom;
                 margin:0;
                 padding: 0;
-                height: 65%;
+                height: 80%;
                 width: 100%;
                 
             }
@@ -118,6 +111,15 @@
                 background-color: #6E8EE0;
                     
             }
+            
+            #helpDiv{
+                float: left;
+                padding: 0;
+                margin: 0;
+                height: 100%;
+                width: 50%;
+                background-color: #6E8EE0;
+                vertical-align: middle;
             
             #legendDiv2{
                 float: left;
@@ -267,7 +269,7 @@
                         size: 8,
                         outline:{
                             width: 2,
-                            color: "#FAAA75"
+                            color: "#B3BCFD"
                         }
                     }
                 };
@@ -686,14 +688,12 @@
         <div id="viewDiv">
             <div id="mapDiv"></div>
                 <div id="panelDiv">
-                    <div id="helpDiv">
-                        <p>To zoom to your location: Press the circular icon under the zoom controls(+/-) and click "Allow" if prompted. Click the eye symbols in the legend to filter results. </p>
-                    </div>
-                    
                     <div id="searchDiv"></div>
                     <div id="legendDiv">
                         <div id="legendDiv1"></div>
-                        <div id="legendDiv2"></div>
+                        <div id="helpDiv">
+                        <p>To zoom to your location: Press the circular icon under the zoom controls(+/-) and click "Allow" if prompted. Click the eye symbols in the legend to filter results. </p>
+                        </div>
                     </div>
                 </div>
         </div>
