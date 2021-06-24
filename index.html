@@ -46,7 +46,7 @@
                 float:left;
                 padding: 0;
                 margin: 0;
-                height: 65%;
+                height: 55%;
                 width: 98.5%; 
                 padding-left: .75%;
                 padding-right: .75%;
@@ -56,7 +56,7 @@
                 float:right;
                 margin: 0;
                 padding: 0;
-                height: 35%;
+                height: 45%;
                 width: 100%;
                 background-color: #6E8EE0;
             }
@@ -83,6 +83,8 @@
                 
                 
             }
+            
+        
             
             #searchDiv{
                 float: center;
@@ -120,15 +122,65 @@
                 width: 50%;
                 background-color: #6E8EE0;
                 vertical-align: middle;
-            
-            #legendDiv2{
-                float: left;
-                padding:0;
-                height: 100%;
-                width: 50%;
-                background-color: #6E8EE0;
-                    
             }
+            
+            .tab{
+                float: top;
+                overflow: hidden;
+                background-color: #6E8EE0;
+                padding:5px 10px 5px 10px;
+                margin: 0px 5px 0px 5px;
+                cursor: pointer;
+                height:20%;
+            }
+            
+            #tab1,#tab2,#tab3{
+                float: left;
+                border: none;
+                outline: none;
+                cursor: pointer;
+                padding: 14px 16px;
+                transition: 0.3s;
+                color: white;
+                font-family: sans-serif;
+                font-weight: bold;
+            }
+            
+            #tab1Content{
+                display: block;
+            }
+            
+            #tab2Content. #tab3Content{
+                display: none;
+            }
+            
+            
+            #tab1:hover, #tab2:hover, #tab3:hover {
+                background-color: #35456C;
+            }
+            
+            #tab1.active, #tab2.active, #tab3.active{
+                background-color: #35456C;
+            }
+            
+            #tab1Content{
+                display: none;
+                padding: 6px 12px;
+                border-top: none;
+                color:white;
+                font-family: sans-serif;
+            }
+            
+            .tabcontent{
+                float: left;
+                overflow: scroll;
+                
+                border-top: 6px solid #35456C;
+                background-color: #556EAD;
+                height:80%;
+                width: 100%;
+            }
+            
             
         </style>
         <link rel="stylesheet" href="https://js.arcgis.com/4.18/esri/css/main.css">
@@ -599,7 +651,7 @@
                 
                 const layerList1 = new LayerList({
                     view: myView,
-                    container: "legendDiv1",
+                    container: "tab2Content",
                     
                     listItemCreatedFunction: function(event){
                         const item = event.item;
@@ -689,17 +741,36 @@
             <div id="mapDiv"></div>
                 <div id="panelDiv">
                     <div id="searchDiv"></div>
-                    <div id="legendDiv">
+                    <div id="legendDiv"><div class="tab">
+                        <div id="tab1" onClick="JavaScript:selectTab(1);">Instructions</div> 
+                        <div id="tab2" onClick="JavaScript:selectTab(2);">Facility Key</div> 
+                         </div>
+                    
+                    <div id="tab1Content" class="tabcontent">
+                        <ul>
+                            <li>Click on the tabs to change between the instructions and map key.</li>
+                            <li>To zoom to your location: Press the circular icon under the zoom controls(+/-) and click "Allow" if prompted.</li>
+                            <li>In the key, click the arrow to expand the category to see its respective facility types. </li>
+                            <li>In the key, click the eye symbol to turn that facility on and off.</li>
+                        </ul>
+                    </div>   
+                    <div id="tab2Content" class="tabcontent">
+                           
+                    </div> 
                         
-                        <div id="helpDiv">
-                        <p>To zoom to your location: Press the circular icon under the zoom controls(+/-) and click "Allow" if prompted. Click the eye symbols in the legend to sort by facility type. </p>
-                        </div>
-                        <div id="legendDiv1"></div>
-                    </div>
                 </div>
         </div>
         
-        
+        <script>
+            function selectTab(tabIndex){
+                document.getElementById('tab1Content').style.display="none";
+                document.getElementById('tab2Content').style.display="none";
+            
+            
+            document.getElementById('tab' + tabIndex + 'Content').style.display="block";
+            
+            }
+        </script>
         
     
     </body>
